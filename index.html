@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#100d12">
+<title>Romeo y Julieta | Una tragedia eterna</title>
+<style>
+:root {
+  --bg: #100d12;
+  --wine: #8e2438;
+  --red: #c84d60;
+  --gold: #d8b783;
+  --cream: #f4e9df;
+  --muted: #b7a8ac;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--cream);
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.7;
+}
+a { color: inherit; }
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 7%;
+  border-bottom: 1px solid #ffffff15;
+  background: #100d12ed;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  backdrop-filter: blur(12px);
+}
+.logo { color: var(--gold); letter-spacing: 3px; }
+.navlinks { display: flex; gap: 20px; flex-wrap: wrap; }
+.navlinks a {
+  font-size: .85rem;
+  text-decoration: none;
+  color: var(--muted);
+}
+.navlinks a:hover { color: var(--gold); }
+.hero {
+  min-height: 88vh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 80px 22px;
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(0deg, #100d12 0%, #100d12a6 45%, #100d1266 100%),
+    radial-gradient(ellipse at 50% 30%, #8e243858, transparent 60%),
+    #171019;
+}
+.hero:before, .hero:after {
+  content: "✦";
+  position: absolute;
+  color: #d8b78325;
+  font-size: 240px;
+  pointer-events: none;
+}
+.hero:before { left: -65px; top: 5%; }
+.hero:after { right: -65px; bottom: 0; }
+.eyebrow {
+  color: var(--gold);
+  letter-spacing: 4px;
+  font-size: .75rem;
+  text-transform: uppercase;
+}
+h1 {
+  font-size: clamp(3.3rem, 11vw, 8rem);
+  line-height: .95;
+  letter-spacing: -4px;
+  margin: 24px 0;
+  font-weight: normal;
+}
+h1 span { color: var(--red); font-style: italic; }
+.subtitle {
+  max-width: 550px;
+  margin: 0 auto 30px;
+  color: #d4c5c7;
+  font-size: 1.12rem;
+}
+.btn {
+  display: inline-block;
+  border: 1px solid var(--gold);
+  color: var(--cream);
+  text-decoration: none;
+  padding: 12px 24px;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+  transition: .25s;
+}
+.btn:hover { background: var(--wine); border-color: var(--red); }
+section { padding: 85px 8%; }
+.section-label {
+  color: var(--red);
+  letter-spacing: 3px;
+  font-size: .75rem;
+  text-transform: uppercase;
+}
+h2 {
+  font-weight: normal;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.1;
+  margin: 12px 0 25px;
+}
+.intro {
+  max-width: 760px;
+  color: var(--muted);
+  font-size: 1.08rem;
+}
+.quote {
+  margin: 35px 0;
+  padding: 24px 28px;
+  border-left: 2px solid var(--red);
+  background: #ffffff05;
+  font-size: 1.25rem;
+  font-style: italic;
+}
+.dark { background: #171219; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 18px;
+  margin-top: 35px;
+}
+.scene {
+  padding: 25px;
+  border: 1px solid #ffffff18;
+  background: linear-gradient(145deg,#ffffff08,#ffffff02);
+  transition: transform .25s, border-color .25s;
+}
+.scene:hover { transform: translateY(-5px); border-color: var(--red); }
+.number { color: var(--gold); font-size: .8rem; letter-spacing: 2px; }
+.scene h3 { font-size: 1.45rem; font-weight: normal; }
+.scene p { color: var(--muted); font-size: .95rem; }
+.timeline {
+  max-width: 750px;
+  margin: 35px auto 0;
+  border-left: 1px solid #9d4353;
+  padding-left: 28px;
+}
+.event { position: relative; padding: 0 0 30px; }
+.event:before {
+  content: "";
+  width: 9px; height: 9px;
+  background: var(--red);
+  border-radius: 50%;
+  position: absolute;
+  left: -33px; top: 10px;
+}
+.event h3 { margin: 0; font-weight: normal; color: var(--gold); }
+.event p { margin: 7px 0; color: var(--muted); }
+.finale {
+  text-align: center;
+  background: radial-gradient(ellipse at center, #65203360, transparent 65%);
+}
+.finale p { max-width: 690px; margin: 20px auto; color: #d5c5c8; }
+#revelacion {
+  max-width: 680px;
+  margin: 25px auto;
+  padding: 24px;
+  border: 1px solid #a94b5b;
+  background: #ffffff06;
+  text-align: left;
+}
+[hidden] { display: none !important; }
+.qrbox {
+  max-width: 640px;
+  margin: 30px auto 0;
+  padding: 30px;
+  text-align: center;
+  background: #f4e9df;
+  color: #21141a;
+  border-radius: 3px;
+}
+#qr {
+  display: block;
+  width: 210px;
+  height: 210px;
+  margin: 20px auto;
+  image-rendering: pixelated;
+}
+#qrstatus { font-size: .9rem; overflow-wrap: anywhere; }
+.qrbox .btn { color: #21141a; border-color: #8e2438; }
+footer {
+  text-align: center;
+  padding: 35px 20px;
+  color: var(--muted);
+  border-top: 1px solid #ffffff15;
+  font-size: .85rem;
+}
+@media(max-width:700px) {
+  nav { align-items: flex-start; flex-direction: column; }
+  .navlinks { gap: 12px; }
+  .grid { grid-template-columns: 1fr; }
+  section { padding: 65px 7%; }
+  h1 { letter-spacing: -2px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">R & J ✦</div>
+  <div class="navlinks">
+    <a href="#historia">La historia</a>
+    <a href="#personajes">Personajes</a>
+    <a href="#cronologia">Cronología</a>
+    <a href="#final">El desenlace</a>
+    <a href="#qrsection">Código QR</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div>
+    <div class="eyebrow">William Shakespeare · Verona</div>
+    <h1>ROMEO <span>&</span><br>JULIETA</h1>
+    <p class="subtitle">
+      Dos familias enfrentadas. Dos jóvenes enamorados.
+      Un destino que ni siquiera el amor pudo cambiar.
+    </p>
+    <a class="btn" href="#historia">Entrar en la historia ↓</a>
+  </div>
+</header>
+
+<section id="historia">
+  <div class="section-label">01 — El comienzo</div>
+  <h2>Un amor nacido<br>entre dos enemigos</h2>
+  <p class="intro">
+    En la ciudad italiana de Verona, los Montesco y los Capuleto
+    mantienen una rivalidad que parece no tener fin. En medio de
+    ese odio, Romeo y Julieta se conocen, se enamoran y deciden
+    desafiar el mundo que intenta separarlos.
+  </p>
+  <div class="quote">
+    «Mi único amor nació de mi único odio».
+    <br><small>— Julieta, Acto I</small>
+  </div>
+  <p class="intro">
+    Su historia plantea una pregunta que atraviesa los siglos:
+    ¿puede el amor sobrevivir cuando el odio de los demás decide
+    el destino de quienes se aman?
+  </p>
+</section>
+
+<section class="dark" id="personajes">
+  <div class="section-label">02 — Los protagonistas</div>
+  <h2>Dos corazones.<br>Un mundo en contra.</h2>
+  <div class="grid">
+    <article class="scene">
+      <div class="number">01 / MONTESCO</div>
+      <h3>Romeo</h3>
+      <p>Apasionado e impulsivo. Sigue sus sentimientos incluso
+      cuando sus decisiones lo conducen a consecuencias irreversibles.</p>
+    </article>
+    <article class="scene">
+      <div class="number">02 / CAPULETO</div>
+      <h3>Julieta</h3>
+      <p>Valiente e inteligente. Pasa de la obediencia a luchar
+      por elegir a quién amar y cómo vivir.</p>
+    </article>
+    <article class="scene">
+      <div class="number">03 / EL DESTINO</div>
+      <h3>Fray Lorenzo</h3>
+      <p>Quiere reconciliar a las familias y ayuda en secreto a
+      los jóvenes, pero un plan cuidadosamente preparado fracasa.</p>
+    </article>
+  </div>
+</section>
+
+<section id="cronologia">
+  <div class="section-label">03 — La tragedia en cinco actos</div>
+  <h2>Cómo se rompe<br>una historia de amor</h2>
+  <div class="timeline">
+    <div class="event">
+      <h3>Acto I · El encuentro</h3>
+      <p>Romeo y Julieta se conocen en una fiesta y se enamoran
+      sin saber al principio que pertenecen a familias enemigas.</p>
+    </div>
+    <div class="event">
+      <h3>Acto II · El balcón</h3>
+      <p>Confiesan su amor y deciden casarse en secreto con la
+      ayuda de Fray Lorenzo.</p>
+    </div>
+    <div class="event">
+      <h3>Acto III · La violencia</h3>
+      <p>Romeo mata a Teobaldo tras la muerte de Mercucio y es
+      desterrado de Verona.</p>
+    </div>
+    <div class="event">
+      <h3>Acto IV · El plan</h3>
+      <p>Julieta toma una poción que la hace parecer muerta para
+      evitar el matrimonio impuesto por su familia. El mensaje
+      que debía explicar el plan no llega a Romeo.</p>
+    </div>
+    <div class="event">
+      <h3>Acto V · El desenlace</h3>
+      <p>Romeo cree que Julieta ha muerto. Al encontrarla en la
+      tumba, se quita la vida. Julieta despierta, lo descubre
+      muerto y también se suicida.</p>
+    </div>
+  </div>
+</section>
+
+<section class="finale" id="final">
+  <div class="section-label">04 — El desenlace original</div>
+  <h2>La tragedia de<br>un amor imposible</h2>
+  <p>
+    Cuando las familias descubren lo ocurrido, comprenden el
+    precio devastador de su enemistad. La muerte de Romeo y
+    Julieta termina convirtiéndose en la razón por la que
+    Montescos y Capuletos finalmente se reconcilian.
+  </p>
+  <button class="btn" id="revealbtn" type="button"
+    aria-expanded="false" aria-controls="revelacion">
+    Descubrir el mensaje final ✦
+  </button>
+  <div id="revelacion" hidden>
+    <h3>El odio heredado también destruye a quienes lo alimentan.</h3>
+    <p>
+      Shakespeare convierte la muerte de los protagonistas en
+      una crítica a la rivalidad familiar, la violencia y las
+      decisiones impulsivas. La reconciliación llega, pero
+      demasiado tarde para salvar a los jóvenes.
+    </p>
+  </div>
+</section>
+
+<section class="dark" id="qrsection">
+  <div class="section-label">05 — Comparte la historia</div>
+  <h2 style="text-align:center">Una historia.<br>Un código. Para siempre.</h2>
+  <p class="intro" style="text-align:center;margin:auto">
+    Escanea el código QR para abrir esta experiencia desde
+    otro teléfono. Publica primero la página para que el código
+    lleve a un enlace accesible desde internet.
+  </p>
+  <div class="qrbox">
+    <div class="section-label">ROMEO & JULIETA</div>
+    <h3>Escanea para entrar en Verona</h3>
+    <img id="qr" alt="Código QR para visitar la página"
+      hidden>
+    <p id="qrstatus" role="status">Preparando el código QR...</p>
+    <button class="btn" id="refreshqr" type="button">
+      Actualizar código QR
+    </button>
+  </div>
+</section>
+
+<footer>
+  <p>ROMEO & JULIETA · Proyecto literario</p>
+  <p>Inspirado en la tragedia de William Shakespeare.</p>
+  <p>El amor, el odio y las consecuencias de nuestras decisiones.</p>
+</footer>
+
+<script>
+const revealButton = document.getElementById("revealbtn");
+const revelation = document.getElementById("revelacion");
+
+revealButton.addEventListener("click", () => {
+  const opening = revelation.hidden;
+  revelation.hidden = !opening;
+  revealButton.setAttribute("aria-expanded", String(opening));
+  revealButton.textContent = opening
+    ? "Ocultar el mensaje ↑"
+    : "Descubrir el mensaje final ✦";
+});
+
+const qr = document.getElementById("qr");
+const status = document.getElementById("qrstatus");
+
+function generateQR() {
+  const isPublished =
+    location.protocol === "https:" ||
+    location.protocol === "http:";
+
+  if (!isPublished || location.hostname === "localhost") {
+    qr.hidden = true;
+    status.textContent =
+      "El QR estará disponible cuando publiques esta página en internet. " +
+      "Por ahora estás abriendo un archivo local.";
+    return;
+  }
+
+  status.textContent = "Generando QR para: " + location.href;
+  qr.hidden = true;
+
+  const imageURL =
+    "https://api.qrserver.com/v1/create-qr-code/&quot; +
+    "?size=300x300&data=" + encodeURIComponent(location.href);
+
+  qr.onload = () => {
+    qr.hidden = false;
+    status.textContent = "¡Listo! Escanea el código para abrir esta página.";
+  };
+
+  qr.onerror = () => {
+    qr.hidden = true;
+    status.textContent =
+      "No se pudo cargar el QR. Comprueba tu conexión e inténtalo de nuevo.";
+  };
+
+  qr.src = imageURL;
+}
+
+document.getElementById("refreshqr")
+  .addEventListener("click", generateQR);
+
+generateQR();
+</script>
+
+</body>
+</html>
